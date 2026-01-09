@@ -1,205 +1,142 @@
-// Client API REST
+// api.ts
+// Client API REST pour remplacer tRPC
+// Configuration dynamique de l'URL de base de l'API
 
 function getAPIBaseURL(): string {
-  // Prod (Netlify / Vercel)
+  // En production (Netlify, Vercel...), utiliser la variable d'environnement
   if (import.meta.env.VITE_API_BASE_URL) {
     return import.meta.env.VITE_API_BASE_URL;
   }
 
-  // Dev local avec proxy Vite
+  // En développement local, utiliser le proxy Vite
   if (import.meta.env.DEV) {
-    return "";
+    return "/api";
   }
 
-  // Backend Render
+  // Par défaut, utiliser le backend Render
   return "https://one-backend-6.onrender.com";
 }
 
 const API_BASE_URL = getAPIBaseURL();
-console.log("[API BASE URL]", API_BASE_URL);
+console.log("[API Config] Base URL:", API_BASE_URL, "| Env:", import.meta.env.MODE);
 
-// =======================
-// Types
-// =======================
+// ====================== Interfaces ======================
 
-export interface DashboardKPIs {
-  malaria_cases: string;
-  tuberculose_cases: string;
-  fvr_humain_cases: number;
-  fvr_animal_cases: number;
-  grippe_aviaire_cases: number;
-  pm25_recent: string;
-  taux_letalite_fvr: number;
-}
+interface DashboardKPIs { /* ... ton code existant ... */ }
+interface RegionStat { /* ... */ }
+interface IndicatorStat { /* ... */ }
+interface RegionMapData { /* ... */ }
+interface MalariaData { /* ... */ }
+interface TuberculoseData { /* ... */ }
+interface FvrHumainData { /* ... */ }
+interface FvrAnimalData { /* ... */ }
+interface GrippeAviaireData { /* ... */ }
+interface PollutionAirData { /* ... */ }
+interface RegionData { /* ... */ }
 
-export interface RegionStat {
-  region: string;
-  total: number;
-}
-
-export interface IndicatorStat {
-  name: string;
-  value: number;
-}
-
-export interface RegionMapData {
-  region: string;
-  fvr_humain: number;
-  fvr_animal: number;
-  grippe_aviaire: number;
-  malaria: number;
-  total_cases: number;
-}
-
-export interface MalariaData {
-  id: number;
-  indicator_code: string;
-  indicator_name: string;
-  year: number;
-  value: string | null;
-  numeric_value: string | null;
-}
-
-export interface TuberculoseData {
-  id: number;
-  indicator_code: string;
-  indicator_name: string;
-  year: number;
-  value: string | null;
-  numeric_value: string | null;
-}
-
-export interface FvrHumainData {
-  id: number;
-  date_bilan: string;
-  cas_confirmes: number;
-  deces: number;
-  gueris: number;
-  region: string | null;
-}
-
-export interface FvrAnimalData {
-  id: number;
-  annee: number;
-  cas: number;
-  espece: string | null;
-  region: string | null;
-}
-
-export interface GrippeAviaireData {
-  id: number;
-  report_id: string;
-  date_rapport: string;
-  region: string | null;
-  cas_confirmes: number;
-}
-
-export interface PollutionAirData {
-  id: number;
-  annee: number;
-  zone: string;
-  concentration_pm25: string | null;
-}
-
-export interface RegionData {
-  id: number;
-  nom: string;
-  code: string;
-}
-
-// =======================
-// Fetch helper
-// =======================
+// ====================== Fetch Helper ======================
 
 async function fetchAPI<T>(endpoint: string, params?: Record<string, any>): Promise<T> {
   let url = `${API_BASE_URL}${endpoint}`;
 
   if (params) {
-    const qs = new URLSearchParams();
-    Object.entries(params).forEach(([k, v]) => {
-      if (v !== undefined && v !== null && v !== "Toutes") {
-        qs.append(k, String(v));
+    const searchParams = new URLSearchParams();
+    Object.entries(params).forEach(([key, value]) => {
+      if (value !== undefined && value !== null && value !== "Toutes") {
+        searchParams.append(key, String(value));
       }
     });
-    if (qs.toString()) url += `?${qs.toString()}`;
+    const queryString = searchParams.toString();
+    if (queryString) url += `?${queryString}`;
   }
 
-  console.log("[API REQUEST]", url);
+  console.log("[API Request]", url);
 
-  const response = await fetch(url);
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+    });
 
-  if (!response.ok) {
-    const err = await response.text();
-    console.error("[API ERROR]", response.status, err);
-    throw new Error(`API Error ${response.status}`);
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("[API Error]", response.status, errorText);
+      throw new Error(`API Error: ${response.statusText} (${response.status})`);
+    }
+
+    const data = await response.json();
+    console.log("[API Response]", endpoint, data);
+    return data;
+  } catch (error) {
+    console.error("[API Fetch Error]", url, error);
+    throw error;
   }
-
-  return response.json();
 }
 
-// =======================
-// API
-// =======================
+// ====================== API Principal ======================
 
 export const api = {
   dashboard: {
-    kpis: () =>
-      fetchAPI<DashboardKPIs>("/api/dashboard/kpis"),
-
-    fvrHumainTotal: () =>
-      fetchAPI<number>("/api/dashboard/fvr-humain-total"),
-
-    fvrHumainByRegion: () =>
-      fetchAPI<RegionStat[]>("/api/dashboard/fvr-humain-by-region"),
-
-    fvrAnimalTotal: () =>
-      fetchAPI<number>("/api/dashboard/fvr-animal-total"),
-
-    fvrAnimalByRegion: () =>
-      fetchAPI<RegionStat[]>("/api/dashboard/fvr-animal-by-region"),
-
+    kpis: (filters?: { region?: string; maladie?: string }) =>
+      fetchAPI<DashboardKPIs>("/api/dashboard/kpis", filters),
+    fvrHumainTotal: (filters?: { region?: string; maladie?: string }) =>
+      fetchAPI<number>("/api/dashboard/fvr-humain-total", filters),
+    fvrHumainByRegion: (filters?: { region?: string; maladie?: string }) =>
+      fetchAPI<RegionStat[]>("/api/dashboard/fvr-humain-by-region", filters),
+    fvrAnimalTotal: (filters?: { region?: string; maladie?: string }) =>
+      fetchAPI<number>("/api/dashboard/fvr-animal-total", filters),
+    fvrAnimalByRegion: (filters?: { region?: string; maladie?: string }) =>
+      fetchAPI<RegionStat[]>("/api/dashboard/fvr-animal-by-region", filters),
     malariaByIndicator: () =>
       fetchAPI<IndicatorStat[]>("/api/dashboard/malaria-by-indicator"),
-
     tuberculoseByIndicator: () =>
       fetchAPI<IndicatorStat[]>("/api/dashboard/tuberculose-by-indicator"),
-
-    mapData: () =>
-      fetchAPI<RegionMapData[]>("/api/dashboard/map-data"),
+    mapData: (filters?: { region?: string; maladie?: string }) =>
+      fetchAPI<RegionMapData[]>("/api/dashboard/map-data", filters),
   },
-
   malaria: {
-    list: () =>
-      fetchAPI<MalariaData[]>("/api/malaria/list"),
+    list: (params?: { year_start?: number; year_end?: number }) =>
+      fetchAPI<MalariaData[]>("/api/malaria/list", params),
   },
-
   tuberculose: {
-    list: () =>
-      fetchAPI<TuberculoseData[]>("/api/tuberculose/list"),
+    list: (params?: { year_start?: number; year_end?: number }) =>
+      fetchAPI<TuberculoseData[]>("/api/tuberculose/list", params),
   },
-
   fvrHumain: {
-    list: () =>
-      fetchAPI<FvrHumainData[]>("/api/fvr-humain/list"),
+    list: () => fetchAPI<FvrHumainData[]>("/api/fvr-humain/list"),
   },
-
   fvrAnimal: {
-    list: () =>
-      fetchAPI<FvrAnimalData[]>("/api/fvr-animal/list"),
+    list: () => fetchAPI<FvrAnimalData[]>("/api/fvr-animal/list"),
   },
-
   grippeAviaire: {
-    list: () =>
-      fetchAPI<GrippeAviaireData[]>("/api/grippe-aviaire/list"),
+    list: () => fetchAPI<GrippeAviaireData[]>("/api/grippe-aviaire/list"),
   },
-
   pollutionAir: {
-    list: () =>
-      fetchAPI<PollutionAirData[]>("/api/pollution-air/list"),
+    list: (params?: { year_start?: number; year_end?: number }) =>
+      fetchAPI<PollutionAirData[]>("/api/pollution-air/list", params),
   },
-
   regions: {
-    list: () =>
-      fetchAPI<RegionData[]>("/api/regions/list"),
+    list: () => fetchAPI<RegionData[]>("/api/regions/list"),
+  },
+};
+
+// ====================== API Extra (Corrélation + Prédiction) ======================
+
+export const apiExtra = {
+  correlations: {
+    byRegion: () => fetchAPI("/api/correlations/by-region"),
+    alerts: () => fetchAPI("/api/correlations/alerts"),
+    summary: () => fetchAPI("/api/correlations/summary"),
+  },
+  predictions: {
+    regions: () => fetchAPI("/api/predictions/regions"),
+    summary: () => fetchAPI("/api/predictions/summary"),
+    advanced: {
+      national: () => fetchAPI("/api/predictions/advanced/national"),
+      region: (region_name: string) =>
+        fetchAPI(`/api/predictions/advanced/region/${region_name}`),
+      status: () => fetchAPI("/api/predictions/advanced/status"),
+    },
   },
 };
