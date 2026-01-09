@@ -1,0 +1,8 @@
+report_id,country,region,date_reported,species,disease,confirmed_cases,deaths,outbreak_status,notes,source,latitude,longitude
+1f1c9dde-8df8-4f27-b633-9b33346c95ed,Senegal,,2022-02-17,Poultry,Influenza A viruses of high pathogenicity (Inf. with) (non-poultry including wild birds) (2017-),0,0,Resolved,Recurrence of an eradicated disease,https://wahis.woah.org,,
+c302f316-e626-4357-a258-291f05ce3845,Senegal,,2022-02-11,Poultry,High pathogenicity avian influenza viruses (poultry) (Inf. with),0,0,Resolved,First occurrence in the country,https://wahis.woah.org,,
+3d132aec-17df-4f23-a1c9-15aa65319943,Senegal,,2022-02-11,Poultry,Influenza A viruses of high pathogenicity (Inf. with) (non-poultry including wild birds) (2017-),0,0,Resolved,First occurrence in a zone or a compartment,https://wahis.woah.org,,
+caadea8c-34b7-4da1-ada9-a4a928e21a0d,Senegal,,2019-06-02,Poultry,Equine influenza virus (Inf. with),0,0,Resolved,First occurrence in the country,https://wahis.woah.org,,
+198697bc-a463-4257-8d1a-f6f2ed142388,Senegal,,2024-03-08,Poultry,Influenza A viruses of high pathogenicity (Inf. with) (non-poultry including wild birds) (2017-),0,0,Resolved,First occurrence in a zone or a compartment,https://wahis.woah.org,,
+5a6bcc9a-457a-46dd-b3af-10bae3673f0e,Senegal,,2024-03-08,Poultry,Influenza A viruses of high pathogenicity (Inf. with) (non-poultry including wild birds) (2017-),0,0,Resolved,Recurrence of an eradicated disease,https://wahis.woah.org,,
+4d66a61e-1c54-4824-a432-9f4e6271066b,Senegal,,2024-03-08,Poultry,High pathogenicity avian influenza viruses (poultry) (Inf. with),0,0,Resolved,Recurrence of an eradicated disease,https://wahis.woah.org,,

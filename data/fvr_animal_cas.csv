@@ -1,0 +1,30 @@
+Continent,Region,ADM_0,ADM1_code,ADM1_name,Additional_Location_Info,YEAR,CASES,SPECIES,SOURCE,ProMed_Archive_Number,NOTES
+Africa,Western Africa,SEN,,,"Ross-Bethio, Rao, M Pal",1994.0,,,Thonnon 2002,,
+Africa,Western Africa,SEN,,,,1997.0,,,OIE 1996-2004,,multiannual incidence - no disease
+Africa,Western Africa,SEN,,,,1998.0,,,OIE 1996-2004,,multiannual incidence - no disease
+Africa,Western Africa,SEN,,,,1999.0,3.0,,OIE 1996-2004,,reported
+Africa,Western Africa,SEN,,,,2001.0,12.0,,OIE 1996-2004,,reported
+Africa,Western Africa,SEN,,,,2002.0,3.0,,OIE 1996-2004,,reported
+Africa,Western Africa,SEN,,,,2003.0,1868.0,"sheep, goats","ProMed, OIE 1996-2004",20031122.2901,reported 16
+Africa,Western Africa,SEN,SEN.1_1,Dakar,,2013.0,7.0,cattle,"Sow 2016, ProMed",20140318.2341029,
+Africa,Western Africa,SEN,SEN.10_1,Saint-Louis,Dagana / Rosso,1987.0,,,Ksiazek 1989,,
+Africa,Western Africa,SEN,SEN.10_1,Saint-Louis,,2003.0,,"sheep, goats",ProMed,20031122.2901,
+Africa,Western Africa,SEN,SEN.10_1,Saint-Louis,,2013.0,45.0,"cattle, goats, 8 wildlife","Sow 2016, ProMed, OIE-WAHIS","20130924.1964250, 20131018.2008030",
+Africa,Western Africa,SEN,SEN.10_1,Saint-Louis,,2014.0,1.0,,"Sow 2016, OIE-WAHIS",,
+Africa,Western Africa,SEN,SEN.10_1,Saint-Louis,,2015.0,63.0,,OIE-WAHIS,,
+Africa,Western Africa,SEN,SEN.10_1,Saint-Louis,,2019.0,84.0,sheep/goats,OIE-WAHIS,,
+Africa,Western Africa,SEN,SEN.10_1,Saint-Louis,Bango,2020.0,1.0,antelope,"OIE-WAHIS, ProMed",20201019.7872817,
+Africa,Western Africa,SEN,SEN.12_1,Tambacounda,,2003.0,,"sheep, goats",ProMed,20031122.2901,
+Africa,Western Africa,SEN,SEN.12_1,Tambacounda,,2015.0,35.0,,OIE-WAHIS,,
+Africa,Western Africa,SEN,SEN.13_1,Thies,,2019.0,10.0,sheep/goats,OIE-WAHIS,,
+Africa,Western Africa,SEN,SEN.14_1,Ziguinchor,,2019.0,75.0,sheep/goats,OIE-WAHIS,,
+Africa,Western Africa,SEN,SEN.4_1,Kaffrine,,2018.0,9.0,,OIE-WAHIS,,
+Africa,Western Africa,SEN,SEN.5_1,Kaolack,,2015.0,11.0,,OIE-WAHIS,,
+Africa,Western Africa,SEN,SEN.5_1,Kaolack,,2018.0,10.0,,OIE-WAHIS,,
+Africa,Western Africa,SEN,SEN.6_1,Kedougou,,2018.0,34.0,,OIE-WAHIS,,
+Africa,Western Africa,SEN,SEN.8_1,Louga,,2018.0,21.0,,OIE-WAHIS,,
+Africa,Western Africa,SEN,SEN.8_1,Louga,,2019.0,12.0,sheep/goats,OIE-WAHIS,,
+Africa,Western Africa,SEN,SEN.9_1,Matam,,2003.0,,"sheep, goats",ProMed,20031122.2901,
+Africa,Western Africa,SEN,SEN.9_1,Matam,,2016.0,30.0,,OIE-WAHIS,,
+Africa,Western Africa,SEN,SEN.9_1,Matam,,2018.0,37.0,,OIE-WAHIS,,
+Africa,Western Africa,SEN,SYC.25_1,Saint Louis,,2018.0,10.0,,OIE-WAHIS,,

@@ -1,0 +1,16 @@
+{
+  "fvr_humain_2025": 7,
+  "fvr_humain_historique": 10,
+  "fvr_humain_sero": 14,
+  "fvr_animal_cas": 29,
+  "fvr_animal_sero": 33,
+  "malaria": 139,
+  "malaria_subnat": 1758,
+  "malaria_para": 351,
+  "tuberculose": 350,
+  "world_health": 17852,
+  "animal_mortalite": 12160,
+  "pluviometrie": 93497,
+  "pollution_air": 3742,
+  "env_sante": 3983
+}

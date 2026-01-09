@@ -1,0 +1,15 @@
+Continent,Region,ADM_0,ADM1_code,ADM1_name,YEAR,YEAR_upper,OUTBREAK2,AGE_lower,AGE_upper,PEOPLE_CAT,PEOPLE_CAT2,SAMPLE_SIZE,POSITIVE,PROPORTION,TEST_USED,AB_TYPE,SOURCE
+Africa,Western Africa,SEN,SEN.6_1,Kédougou,1982.0,,No,,,Random,Random,163.0,0.0,0.0,IFA,IgM_IgG,Saluzzo 1987
+Africa,Western Africa,SEN,,,1983.0,,No,,,Random,Random,146.0,0.0,0.0,IFA,IgM_IgG,Saluzzo 1987
+Africa,Western Africa,SEN,,,1984.0,,No,,,Random,Random,203.0,0.0,0.0,IFA,IgM_IgG,Saluzzo 1987
+Africa,Western Africa,SEN,SEN.12_1,Tambacounda,1984.0,,No,,,Random,Random,341.0,5.0,0.0146627565982405,IFA,IgM_IgG,Saluzzo 1987
+Africa,Western Africa,SEN,SEN.14_1,Ziguinchor,1984.0,,No,,,Random,Random,481.0,4.0,0.0083160083160083,IFA,IgM_IgG,Saluzzo 1987
+Africa,Western Africa,SEN,,,1985.0,,No,,,Random,Random,229.0,1.0,0.0043668122270742,IFA,IgM_IgG,Saluzzo 1987
+Africa,Western Africa,SEN,SEN.9_1,Matam,1989.0,,Outbreak associated,,,High_risk,High_risk,273.0,61.0,0.223443223443223,ELISA,IgG,Wilson 1994
+Africa,Western Africa,SEN,SEN.10_1,Saint-Louis,1995.0,,Outbreak associated,,,Random,Random,496.0,80.0,0.161290322580645,ELISA,IgG,Thonnon 2002
+Africa,Western Africa,SEN,SEN.10_1,Saint-Louis,1996.0,,No,,,Random,Random,850.0,127.0,0.149411764705882,ELISA,IgG,Thonnon 2002
+Africa,Western Africa,SEN,SEN.12_1,Tambacounda,1998.0,,Outbreak associated,,,Random,Random,1520.0,79.0,0.0519736842105263,ELISA,IgG,Marrama 2005
+Africa,Western Africa,SEN,SEN.6_1,Kédougou,2009.0,2013.0,Outbreak associated,,,Hospital,Clinical sign,13845.0,1.0,7.22282412423257e-05,ELISA,IgM,Sow 2016 (2)
+Africa,Western Africa,SEN,SEN.13_1,Thiès,2013.0,2014.0,Outbreak associated,,,Suspected cases,Clinical sign,196.0,17.0,0.086734693877551,ELISA,IgG,Sow 2016
+Africa,Western Africa,SEN,SEN.6_1,Kédougou,2013.0,2014.0,Outbreak associated,,,Suspected cases,Clinical sign,338.0,7.0,0.0207100591715976,ELISA,IgG,Sow 2016
+Africa,Western Africa,SEN,SEN.8_1,Louga,2013.0,2014.0,Outbreak associated,,,Suspected cases,Clinical sign,1.0,0.0,0.0,ELISA,IgG,Sow 2016

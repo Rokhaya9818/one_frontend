@@ -1,0 +1,11 @@
+Continent,Region,ADM_0,ADM1_code,ADM1_name,Location_Info,YEAR,CASES,SOURCE,ProMed_Archive_Number,Notes,Unnamed: 11,Unnamed: 12,Unnamed: 13,Unnamed: 14,Unnamed: 15,Unnamed: 16,Unnamed: 17,Unnamed: 18,Unnamed: 19,Unnamed: 20,Unnamed: 21,Unnamed: 22
+Africa,Western Africa,SEN,,,,2013.0,2.0,"OIE-WAHIS, Sow 2016",,,,,,,,,,,,,,
+Africa,Western Africa,SEN,,,,2015.0,1.0,OIE-WAHIS,,,,,,,,,,,,,,
+Africa,Western Africa,SEN,SEN.10_1,Saint-Louis,Dagana / Rosso,1986.0,,Ksiazek 1989,,,,,,,,,,,,,,
+Africa,Western Africa,SEN,SEN.10_1,Saint-Louis,Dagana / Rosso,1987.0,,Ksiazek 1989,,,,,,,,,,,,,,
+Africa,Western Africa,SEN,SEN.10_1,Saint-Louis,Dagana / Rosso,1988.0,,Ksiazek 1989,,,,,,,,,,,,,,
+Africa,Western Africa,SEN,SEN.13_1,Thiès,,2013.0,2.0,Sow 2016,,,,,,,,,,,,,,
+Africa,Western Africa,SEN,SEN.13_1,Thiès,,2014.0,,Sow 2016,,2013 cases could have occurred in 2014,,,,,,,,,,,,
+Africa,Western Africa,SEN,SEN.6_1,Kédougou,,2013.0,8.0,Sow 2016,,,,,,,,,,,,,,
+Africa,Western Africa,SEN,SEN.6_1,Kédougou,,2014.0,,Sow 2016,,2013 cases could have occurred in 2014,,,,,,,,,,,,
+Africa,Western Africa,SEN,SEN.8_1,Louga,,2013.0,1.0,Sow 2016,,,,,,,,,,,,,,
