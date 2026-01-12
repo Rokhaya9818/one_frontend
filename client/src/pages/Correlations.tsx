@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import { api } from "@/lib/api";
+import { apiExtra } from "@/lib/api";  // ← Importer apiExtra
 import SenegalMapWithSVG from "@/components/SenegalMapWithSVG";
 import { PluviometrieMalariaChart, PollutionTuberculoseChart, FVRTransmissionChart } from "@/components/CorrelationCharts";
 
@@ -27,19 +27,22 @@ interface CorrelationSummary {
 }
 
 export default function Correlations() {
+  // ✅ CORRIGÉ: Utiliser apiExtra.correlations.byRegion() au lieu de fetch()
   const { data: correlations } = useQuery<RegionCorrelation[]>({
     queryKey: ["correlations", "by-region"],
-    queryFn: () => fetch("/api/correlations/by-region").then(res => res.json()),
+    queryFn: () => apiExtra.correlations.byRegion(),
   });
 
+  // ✅ CORRIGÉ: Utiliser apiExtra.correlations.alerts() au lieu de fetch()
   const { data: alerts } = useQuery<CorrelationAlert[]>({
     queryKey: ["correlations", "alerts"],
-    queryFn: () => fetch("/api/correlations/alerts").then(res => res.json()),
+    queryFn: () => apiExtra.correlations.alerts(),
   });
 
+  // ✅ CORRIGÉ: Utiliser apiExtra.correlations.summary() au lieu de fetch()
   const { data: summary } = useQuery<CorrelationSummary>({
     queryKey: ["correlations", "summary"],
-    queryFn: () => fetch("/api/correlations/summary").then(res => res.json()),
+    queryFn: () => apiExtra.correlations.summary(),
   });
 
   const getRiskColor = (level: string) => {
