@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { TrendingUp, AlertTriangle, Cloud, Droplets, ThermometerSun } from 'lucide-react';
+import { apiExtra } from "@/lib/api";  // ← Importer apiExtra
 
 interface RegionPrediction {
   region: string;
@@ -42,6 +43,7 @@ export default function Predictions() {
   const [summary, setSummary] = useState<PredictionSummary | null>(null);
   const [modelStatus, setModelStatus] = useState<ModelStatus | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetchPredictions();
@@ -49,21 +51,21 @@ export default function Predictions() {
 
   const fetchPredictions = async () => {
     try {
-      const [predictionsRes, summaryRes, statusRes] = await Promise.all([
-        fetch('/api/predictions/regions'),
-        fetch('/api/predictions/summary'),
-        fetch('/api/predictions/advanced/status')
+      setError(null);
+      
+      // ✅ CORRIGÉ: Utiliser apiExtra au lieu de fetch()
+      const [predictionsData, summaryData, statusData] = await Promise.all([
+        apiExtra.predictions.regions(),
+        apiExtra.predictions.summary(),
+        apiExtra.predictions.advanced.status(),
       ]);
-
-      const predictionsData = await predictionsRes.json();
-      const summaryData = await summaryRes.json();
-      const statusData = await statusRes.json();
 
       setPredictions(predictionsData);
       setSummary(summaryData);
       setModelStatus(statusData);
     } catch (error) {
       console.error('Erreur lors du chargement des prédictions:', error);
+      setError('Erreur lors du chargement des prédictions. Veuillez réessayer.');
     } finally {
       setLoading(false);
     }
@@ -87,6 +89,19 @@ export default function Predictions() {
     return (
       <div className="flex items-center justify-center h-screen">
         <div className="text-lg">Chargement des prédictions...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="p-6">
+        <Alert className="border-red-200 bg-red-50">
+          <AlertTriangle className="h-4 w-4 text-red-600" />
+          <AlertDescription>
+            <div className="font-semibold text-red-900">{error}</div>
+          </AlertDescription>
+        </Alert>
       </div>
     );
   }
@@ -284,50 +299,57 @@ export default function Predictions() {
 
                 {/* Facteurs environnementaux */}
                 <div>
-                  <div className="font-semibold mb-2 text-sm">Facteurs Environnementaux</div>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex items-center gap-2">
-                      <Cloud className="h-4 w-4" />
-                      <span>PM2.5: {pred.pollution_pm25} µg/m³</span>
+                  <div className="flex items-center gap-2 mb-2">
+                    <Cloud className="h-4 w-4" />
+                    <span className="font-semibold">Facteurs Environnementaux</span>
+                  </div>
+                  <div className="space-y-1 text-sm">
+                    <div className="flex justify-between">
+                      <span className="flex items-center gap-1">
+                        <Droplets className="h-3 w-3" /> PM2.5:
+                      </span>
+                      <span className="font-semibold">{pred.pollution_pm25.toFixed(1)} µg/m³</span>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Droplets className="h-4 w-4" />
-                      <span>Risque saisonnier: {pred.seasonal_risk}</span>
+                    <div className="flex justify-between">
+                      <span className="flex items-center gap-1">
+                        <ThermometerSun className="h-3 w-3" /> Climat:
+                      </span>
+                      <span className="font-semibold">{pred.climate_risk_score}/100</span>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <ThermometerSun className="h-4 w-4" />
-                      <span>Climat: {pred.climate_risk_score}/100</span>
+                    <div className="flex justify-between">
+                      <span>Saison:</span>
+                      <span className="font-semibold">{pred.seasonal_risk}</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Facteurs de risque */}
-                {pred.risk_factors.length > 0 && (
+                {pred.risk_factors && pred.risk_factors.length > 0 && (
                   <div>
-                    <div className="font-semibold mb-2 text-sm">Facteurs de Risque</div>
-                    <ul className="space-y-1 text-xs">
+                    <span className="font-semibold text-sm">Facteurs de Risque</span>
+                    <div className="mt-2 space-y-1">
                       {pred.risk_factors.map((factor, idx) => (
-                        <li key={idx} className="flex items-start gap-1">
-                          <span>•</span>
-                          <span>{factor}</span>
-                        </li>
+                        <div key={idx} className="text-xs bg-yellow-50 p-2 rounded border border-yellow-200">
+                          ⚠️ {factor}
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                   </div>
                 )}
 
                 {/* Recommandations */}
-                <div>
-                  <div className="font-semibold mb-2 text-sm">Recommandations</div>
-                  <ul className="space-y-1 text-xs">
-                    {pred.recommendations.map((rec, idx) => (
-                      <li key={idx} className="flex items-start gap-1">
-                        <span>•</span>
-                        <span>{rec}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                {pred.recommendations && pred.recommendations.length > 0 && (
+                  <div>
+                    <span className="font-semibold text-sm">Recommandations</span>
+                    <div className="mt-2 space-y-1">
+                      {pred.recommendations.map((rec, idx) => (
+                        <div key={idx} className="text-xs bg-blue-50 p-2 rounded border border-blue-200">
+                          ✓ {rec}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </CardContent>
             </Card>
           ))}
