@@ -20,7 +20,7 @@ interface Message {
 function getAssistantEndpoint(): string {
   // En production (Netlify), utiliser le backend Render
   if (import.meta.env.VITE_API_BASE_URL) {
-    return `${import.meta.env.VITE_API_BASE_URL}/assistant/chat`;
+    return `${import.meta.env.VITE_API_BASE_URL}/api/assistant/chat`;  // ✅ CORRIGÉ: Ajouter /api
   }
   
   // En développement local, utiliser le proxy Vite
@@ -29,7 +29,7 @@ function getAssistantEndpoint(): string {
   }
   
   // Par défaut, utiliser le backend Render
-  return "https://one-backend-6.onrender.com/assistant/chat";
+  return "https://one-backend-6.onrender.com/api/assistant/chat";  // ✅ CORRIGÉ: Ajouter /api
 }
 
 const API_ENDPOINT = getAssistantEndpoint();
